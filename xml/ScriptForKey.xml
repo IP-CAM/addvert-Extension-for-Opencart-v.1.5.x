@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<modification>
+        <id>ScriptGetOrderKey</id>
+        <version>1.0</version>
+        <vqmver>2.X</vqmver>
+        <author>Tanino</author>
+        <file name="catalog\controller\checkout\success.php">
+                <operation info="After test">
+                        <search position="before"><![CDATA[ $this->cart->clear(); ]]></search>
+                        <add><![CDATA[
+							//INIZIO AGGIUNTA ADDVERT
+			
+			//GET TOTAL
+						$total = 0;
+			$taxes = $this->cart->getTaxes();
+          
+			$this->load->model('setting/extension');
+         
+			$sort_order = array(); 
+         
+			$results = $this->model_setting_extension->getExtensions('total');
+         
+			foreach ($results as $key => $value) {
+				$sort_order[$key] = $this->config->get($value['code'] . '_sort_order');
+			}
+         
+			array_multisort($sort_order, SORT_ASC, $results);
+         
+			foreach ($results as $result) {
+				if ($this->config->get($result['code'] . '_status')) {
+					$this->load->model('total/' . $result['code']);
+      
+					$this->{'model_total_' . $result['code']}->getTotal($total_data, $total, $taxes);
+				}
+			}
+			
+			
+			// INSERISCI QUI IL TUO ADDVERT ID E LA TUA CHIAVE SEGRETA
+			$addvert_id = 0;
+			$addvert_secret = '0miYDvJKSIO6lz5Dud6KD42HTsfaaKTB';
+  
+			// Dati dell'ordine generati localmente dopo la conclusione dello stesso
+			$order_id = $this->session->data['order_id'];// ID univoco dell'ordine utilizzato internamente al sito e-commerce (numerico o alfanumerico)
+			$order_total = $total;   // Totale dell'ordine concluso dall'utente (in euro)
+			
+			$this->data['order_key'] = file_get_contents('http://addvert.it/api/order/prep_total?ecommerce_id='.$addvert_id.'&secret='.$addvert_secret.'&tracking_id='.$order_id.'&total='.$order_total);
+			
+
+			
+			//FINE ADDVERT
+						]]></add>
+                </operation>
+        </file>
+</modification>

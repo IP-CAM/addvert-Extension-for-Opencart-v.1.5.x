@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<modification>
+        <id>ScriptAdd</id>
+        <version>1.0</version>
+        <vqmver>2.X</vqmver>
+        <author>Tanino</author>
+        <file name="catalog\view\theme\*\template\common\success.tpl">
+                <operation info="After test">
+                        <search position="after"><![CDATA[ <?php echo $content_top; ?> ]]></search>
+                        <add><![CDATA[
+						  <script src="http://addvert.it/api/order/send_total?key=<?php echo $order_key; ?>"></script>
+						]]></add>
+                </operation>
+        </file>
+</modification>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<modification>
+        <id>DynamicMetaTags</id>
+        <version>1.0</version>
+        <vqmver>2.X</vqmver>
+        <author>Tanino</author>
+        <file name="catalog\view\theme\*\template\common\header.tpl">
+                <operation info="After test">
+                        <search position="after"><![CDATA[ <head> ]]></search>
+                        <add><![CDATA[
+                        <?php if(isset($_GET["product_id"])){
+							$this->load->model('catalog/product');
+							$product_id=$_GET["product_id"];
+							$product_info = $this->model_catalog_product->getProduct($product_id);
+
+							if ($product_info) { ?>
+								<meta property="og:url" content="<?php echo $this->url->link('product/product&product_id='.$product_id); ?>" />								
+								<meta property="og:description" content="<?php echo $product_info['description'];?>" />
+								<meta property="og:title" content="<?php echo $product_info['name'];?>" />
+								<meta name="addvert:ecommerce_id" content="12" />
+								<meta property="og:image" content="http://localhost/opencart/upload/image/<?php echo $product_info['image'];?>" />
+								<meta name="addvert:price" content="<?php echo $product_info['price'];?>" />
+						<?php }
+						}
+						?>
+                        
+]]></add>
+                </operation>
+        </file>
+</modification>
