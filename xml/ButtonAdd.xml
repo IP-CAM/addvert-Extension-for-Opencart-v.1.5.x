@@ -8,7 +8,7 @@
                 <operation info="After test">
                         <search position="after"><![CDATA[ <div class="share"> ]]></search>
                         <add><![CDATA[
-							<script type="text/javascript" src="http://addvert.it/api/js/addvert-btn.js"></script>
+							<script type="text/javascript" src="http://addvert.socialdev.me/api/js/addvert-btn.js"></script>
 							<div class="addvert-btn" data-width="130"></div>
 						]]></add>
                 </operation>

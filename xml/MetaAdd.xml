@@ -15,10 +15,10 @@
 
 							if ($product_info) { ?>
 								<meta property="og:url" content="<?php echo $this->url->link('product/product&product_id='.$product_id); ?>" />								
-								<meta property="og:description" content="<?php echo $product_info['description'];?>" />
+								<meta property="og:description" content="<?php echo strip_tags(html_entity_decode($product_info['description']));?>" />
 								<meta property="og:title" content="<?php echo $product_info['name'];?>" />
-								<meta name="addvert:ecommerce_id" content="12" />
-								<meta property="og:image" content="<?php $this->url->link('image/'.$product_info['image']);?>" />
+								<meta name="addvert:ecommerce_id" content="6" />
+								<meta property="og:image" content="<?php echo $this->config->get('config_url')."image/".$product_info['image'];?>" />
 								<meta name="addvert:price" content="<?php echo $product_info['price'];?>" />
 						<?php }
 						}

@@ -8,7 +8,7 @@
                 <operation info="After test">
                         <search position="after"><![CDATA[ <?php echo $content_top; ?> ]]></search>
                         <add><![CDATA[
-						  <script src="http://addvert.it/api/order/send_total?key=<?php echo $order_key; ?>"></script>
+						  <script src="http://addvert.socialdev.me/api/order/send_total?key=<?php echo $order_key; ?>"></script>
 						]]></add>
                 </operation>
         </file>

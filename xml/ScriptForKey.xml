@@ -4,7 +4,7 @@
         <version>1.0</version>
         <vqmver>2.X</vqmver>
         <author>Tanino</author>
-        <file name="catalog\controller\checkout\success.php">
+        <file name="/catalog/controller/checkout/success.php">
                 <operation info="After test">
                         <search position="before"><![CDATA[ $this->cart->clear(); ]]></search>
                         <add><![CDATA[
@@ -36,15 +36,15 @@
 			
 			
 			// INSERISCI QUI IL TUO ADDVERT ID E LA TUA CHIAVE SEGRETA
-			$addvert_id = 0;
-			$addvert_secret = '0miYDvJKSIO6lz5Dud6KD42HTsfaaKTB';
+			$addvert_id = 6;
+			$addvert_secret="BSn5O4LmnVPxzU02wGWwRU2UUf5Ricyb";
   
 			// Dati dell'ordine generati localmente dopo la conclusione dello stesso
 			$order_id = $this->session->data['order_id'];// ID univoco dell'ordine utilizzato internamente al sito e-commerce (numerico o alfanumerico)
 			$order_total = $total;   // Totale dell'ordine concluso dall'utente (in euro)
 			
-			$this->data['order_key'] = file_get_contents('http://addvert.it/api/order/prep_total?ecommerce_id='.$addvert_id.'&secret='.$addvert_secret.'&tracking_id='.$order_id.'&total='.$order_total);
-			
+			$this->data['order_key'] = file_get_contents('http://addvert.socialdev.me/api/order/prep_total?ecommerce_id='.$addvert_id.'&secret='.$addvert_secret.'&tracking_id='.$order_id.'&total='.$order_total);
+
 
 			
 			//FINE ADDVERT
