@@ -18,7 +18,7 @@
 								<meta property="og:description" content="<?php echo $product_info['description'];?>" />
 								<meta property="og:title" content="<?php echo $product_info['name'];?>" />
 								<meta name="addvert:ecommerce_id" content="12" />
-								<meta property="og:image" content="<?php $this->url->link('image/'.$product_info['image'];?>" />
+								<meta property="og:image" content="<?php $this->url->link('image/'.$product_info['image']);?>" />
 								<meta name="addvert:price" content="<?php echo $product_info['price'];?>" />
 						<?php }
 						}
