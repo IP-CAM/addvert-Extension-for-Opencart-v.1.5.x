@@ -12,18 +12,34 @@
 							$this->load->model('catalog/product');
 							$product_id=$_GET["product_id"];
 							$product_info = $this->model_catalog_product->getProduct($product_id);
-
-							if ($product_info) { ?>
+                                                        
+                            
+							if ($product_info) {  ?>
 								<meta property="og:url" content="<?php echo $this->url->link('product/product&product_id='.$product_id); ?>" />								
 								<meta property="og:description" content="<?php echo strip_tags(html_entity_decode($product_info['description']));?>" />
 								<meta property="og:title" content="<?php echo $product_info['name'];?>" />
 								<meta name="addvert:ecommerce_id" content="6" />
 								<meta property="og:image" content="<?php echo $this->config->get('config_url')."image/".$product_info['image'];?>" />
 								<meta name="addvert:price" content="<?php echo $product_info['price'];?>" />
-                                                                <?php if($product_info['tag']) {
-                                                                    $tags = explode(", ",$product_info['tag']);
-                                                                    foreach($tags as $tag) {
-                                                                        echo "<meta name=\"addvert:tag\" content=\"{$tag}\" />\n";
+                                                                <?php 
+                                                                    $categories = $this->model_catalog_product->getCategories($product_id);
+                                                                    if ($categories) {
+                                                                        $i=0;
+                                                                        foreach($categories as $cat) {
+                                                                            $tmp = $this->model_catalog_category->getCategory($cat['category_id']);
+                                                                            if($i == 0) {
+                                                                                echo "<meta name=\"addvert:category\" content=\"{$tmp['name']}\" />\n";
+                                                                            } else {
+                                                                                echo "<meta name=\"addvert:tag\" content=\"{$tmp['name']}\" />\n";
+                                                                            }
+                                                                            $i++;
+                                                                        }
+                                                                        
+                                                                    }
+                                                                    if($product_info['tag']) {
+                                                                        $tags = explode(", ",$product_info['tag']);
+                                                                        foreach($tags as $tag) {
+                                                                            echo "<meta name=\"addvert:tag\" content=\"{$tag}\" />\n";
                                                                         }
                                                                     }
                                                                 }
