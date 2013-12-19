@@ -8,9 +8,9 @@
                 <operation info="After test">
                         <search position="after"><![CDATA[ <head> ]]></search>
                         <add><![CDATA[
-                        <?php if(isset($_GET["product_id"])){
+                        <?php if(isset($this->request->get['product_id'])){
 							$this->load->model('catalog/product');
-							$product_id=$_GET["product_id"];
+							$product_id=$this->request->get['product_id'];
 							$product_info = $this->model_catalog_product->getProduct($product_id);
                                                         
                             
@@ -20,19 +20,21 @@
 								<meta property="og:title" content="<?php echo $product_info['name'];?>" />
 								<meta name="addvert:ecommerce_id" content="6" />
 								<meta property="og:image" content="<?php echo $this->config->get('config_url')."image/".$product_info['image'];?>" />
-								<meta name="addvert:price" content="<?php echo $product_info['price'];?>" />
+								<meta name="addvert:price" content="<?php echo number_format($this->tax->calculate($product_info['price'], $product_info['tax_class_id'], $this->config->get('config_tax')), 2); ?>" />
                                                                 <?php 
                                                                     $categorie = $this->model_catalog_product->getCategories($product_id);
                                                                     if ($categorie) {
                                                                         $i=0;
                                                                         foreach($categorie as $cat) {
                                                                             $tmp = $this->model_catalog_category->getCategory($cat['category_id']);
-                                                                            if($i == 0) {
-                                                                                echo "<meta name=\"addvert:category\" content=\"{$tmp['name']}\" />\n";
-                                                                            } else {
-                                                                                echo "<meta name=\"addvert:tag\" content=\"{$tmp['name']}\" />\n";
+                                                                            if(isset($tmp['name'])) {
+                                                                                if($i == 0) {
+                                                                                    echo "<meta name=\"addvert:category\" content=\"{$tmp['name']}\" />\n";
+                                                                                } else {
+                                                                                    echo "<meta name=\"addvert:tag\" content=\"{$tmp['name']}\" />\n";
+                                                                                }
+                                                                                $i++;
                                                                             }
-                                                                            $i++;
                                                                         }
                                                                         
                                                                     }
