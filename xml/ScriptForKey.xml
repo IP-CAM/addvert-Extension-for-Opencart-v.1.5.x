@@ -43,7 +43,7 @@
 			$order_id = $this->session->data['order_id'];// ID univoco dell'ordine utilizzato internamente al sito e-commerce (numerico o alfanumerico)
 			$order_total = $total;   // Totale dell'ordine concluso dall'utente (in euro)
 			
-			$this->data['order_key'] = file_get_contents('http://addvert.socialdev.me/api/order/prep_total?ecommerce_id='.$addvert_id.'&secret='.$addvert_secret.'&tracking_id='.$order_id.'&total='.$order_total);
+			$this->data['order_key'] = file_get_contents('http://addvert.it/api/order/prep_total?ecommerce_id='.$addvert_id.'&secret='.$addvert_secret.'&tracking_id='.$order_id.'&total='.$order_total);
 
 
 			
