@@ -22,10 +22,10 @@
 								<meta property="og:image" content="<?php echo $this->config->get('config_url')."image/".$product_info['image'];?>" />
 								<meta name="addvert:price" content="<?php echo $product_info['price'];?>" />
                                                                 <?php 
-                                                                    $categories = $this->model_catalog_product->getCategories($product_id);
-                                                                    if ($categories) {
+                                                                    $categorie = $this->model_catalog_product->getCategories($product_id);
+                                                                    if ($categorie) {
                                                                         $i=0;
-                                                                        foreach($categories as $cat) {
+                                                                        foreach($categorie as $cat) {
                                                                             $tmp = $this->model_catalog_category->getCategory($cat['category_id']);
                                                                             if($i == 0) {
                                                                                 echo "<meta name=\"addvert:category\" content=\"{$tmp['name']}\" />\n";
