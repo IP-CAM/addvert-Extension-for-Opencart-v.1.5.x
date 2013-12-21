@@ -39,9 +39,9 @@
                                                                         
                                                                     }
                                                                     if($product_info['tag']) {
-                                                                        $tags = explode(", ",$product_info['tag']);
+                                                                        $tags = explode(",",$product_info['tag']);
                                                                         foreach($tags as $tag) {
-                                                                            echo "<meta name=\"addvert:tag\" content=\"{$tag}\" />\n";
+                                                                            echo "<meta name=\"addvert:tag\" content=\"".trim($tag)."\" />\n";
                                                                         }
                                                                     }
                                                                 }
