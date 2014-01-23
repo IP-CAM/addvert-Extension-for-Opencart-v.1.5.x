@@ -42,8 +42,20 @@
 			// Dati dell'ordine generati localmente dopo la conclusione dello stesso
 			$order_id = $this->session->data['order_id'];// ID univoco dell'ordine utilizzato internamente al sito e-commerce (numerico o alfanumerico)
 			$order_total = $total;   // Totale dell'ordine concluso dall'utente (in euro)
+            
+            $url = 'http://addvert.it/api/order/prep_total?ecommerce_id='.$addvert_id.'&secret='.$addvert_secret.'&tracking_id='.$order_id.'&total='.$order_total;
+            
+            if(is_callable('curl_init')){
+                $ch = curl_init();
+                curl_setopt($ch, CURLOPT_URL, $url);
+                curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                $this->data['order_key'] = curl_exec($ch);
+                curl_close($ch);
+            } else {
+                $this->data['order_key'] = file_get_contents('http://addvert.it/api/order/prep_total?ecommerce_id='.$addvert_id.'&secret='.$addvert_secret.'&tracking_id='.$order_id.'&total='.$order_total);
+            }
 			
-			$this->data['order_key'] = file_get_contents('http://addvert.it/api/order/prep_total?ecommerce_id='.$addvert_id.'&secret='.$addvert_secret.'&tracking_id='.$order_id.'&total='.$order_total);
+			
 
 
 			
